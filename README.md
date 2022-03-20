@@ -16,10 +16,9 @@ My main goal was to make an app that fetches data from the web, so I could pract
 - Future Builder
 
 # How to use
-1° - Download the project in your machine
-2° - Run 'flutter pub get' in your project
-3° - Go to The Movie DB website, make an account and generate an API key
-4° - Go into the constant file, under the file folder, and paste your API key in the apiKey variable
-5° - Run your project
+- Download the project in your machine
+- Run `flutter pub get` in your project
+- Go to The Movie DB website, make an account and generate an API key
+- Go into the constant file, under the file folder, and paste your API key in the apiKey variable
+- Run your project
 
-My main goal was to make an app that fetches data from the web, so I could practice how to make HTTP requests, consume data from an API, with pagination, and display it. I also wanted to learn how to use Provider, and practice the MVVM architecture.
