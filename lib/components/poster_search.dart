@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movieflix/components/text_search_poster.dart';
 
@@ -20,20 +19,13 @@ class PosterSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16),
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.18,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /*CachedNetworkImage(
-              width: MediaQuery.of(context).size.width * 0.45,
-              height: MediaQuery.of(context).size.height * 0.18,
-              imageUrl: "https://image.tmdb.org/t/p/original$poster",
-              placeholder: (context, url) => const CircularProgressIndicator(),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ), */
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.45,
               height: MediaQuery.of(context).size.height * 0.18,
               child: Image(
@@ -42,12 +34,12 @@ class PosterSearch extends StatelessWidget {
                 errorBuilder: (BuildContext context, Object exception,
                     StackTrace? stackTrace) {
                   return Container(
-                    child: Icon(Icons.error),
+                    child: const Icon(Icons.error),
                   );
                 },
               ),
             ),
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.45,
               height: MediaQuery.of(context).size.height * 0.18,
               child: Column(
@@ -55,11 +47,11 @@ class PosterSearch extends StatelessWidget {
                 children: [
                   TextSearchPoster(
                     text: title,
-                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    textStyle: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextSearchPoster(
                     text: releaseDate ?? "",
-                    textStyle: TextStyle(fontSize: 10, color: Colors.grey),
+                    textStyle: const TextStyle(fontSize: 10, color: Colors.grey),
                   ),
                 ],
               ),

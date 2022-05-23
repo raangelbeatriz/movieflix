@@ -51,15 +51,15 @@ class _HomePageState extends State<HomePage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) {
-                    return SearchMoviesPage();
+                    return const SearchMoviesPage();
                   },
                 ),
               );
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           )
         ],
-        title: Text(kTitleApp),
+        title: const Text(kTitleApp),
       ),
       body: SafeArea(
         child: Padding(
@@ -73,13 +73,13 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 Center(
-                  child: Container(
+                  child: SizedBox(
                     height: size.height * 0.35, //0.35
                     width: size.width,
                     child: Consumer<HomePageViewModel>(
                       builder: (context, value, child) {
                         if (value.isLoadingMovies) {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         } else if (value.posterMovies.isNotEmpty) {
                           return PageView.builder(
                             controller: pageController,
@@ -105,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                             },
                           );
                         } else {
-                          return CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         }
                       },
                     ),
@@ -132,19 +132,18 @@ class _HomePageState extends State<HomePage> {
                   "Popular Movies",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                Container(
+                SizedBox(
                   height: size.height * 0.38, //300
                   width: size.width,
                   child: Consumer<HomePageViewModel>(
                     builder: (context, value, child) {
                       if (value.isLoadingMovies) {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       } else if (value.posterMovies.isNotEmpty) {
                         return NotificationListener<ScrollNotification>(
                           onNotification: (notification) {
                             if (notification.metrics.maxScrollExtent ==
                                 notification.metrics.pixels) {
-                              print("Out of the screen");
                               if (value.isLoadingMovies == false &&
                                   value.page < value.totalPages) {
                                 value.fetchPopularMovies();
@@ -174,7 +173,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       } else {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                     },
                   ),

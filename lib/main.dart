@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movieflix/constants.dart';
 import 'package:movieflix/screens/Home%20Page/home_page.dart';
-import 'package:movieflix/screens/Movie%20Details/movie_details.dart';
 import 'package:movieflix/screens/Movie%20Search/search_movies.dart';
 import 'package:movieflix/screens/Home%20Page/home_page_viewmodel.dart';
 import 'package:movieflix/screens/Movie%20Search/search_movies_viewmodel.dart';
@@ -19,7 +18,7 @@ void main() {
           create: (context) => SearchMoviesViewModel(),
         ),
       ],
-      child: MovieFlix(),
+      child: const MovieFlix(),
     ),
   );
 }

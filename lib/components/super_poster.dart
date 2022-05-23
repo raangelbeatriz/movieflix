@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:movieflix/components/go_back_widget.dart';
 import 'package:movieflix/components/text_search_poster.dart';
 import 'package:movieflix/constants.dart';
@@ -21,8 +20,6 @@ class SuperPosterWidget extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          //height: MediaQuery.of(context).size.height * 0.75,
-          //height: 500,
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: NetworkImage(
@@ -61,7 +58,7 @@ class SuperPosterWidget extends StatelessWidget {
                 const SizedBox(
                   width: 20,
                 ),
-                Container(
+                SizedBox(
                   width: 200,
                   child: TextSearchPoster(text: "Release Date: $releaseDate"),
                 ),

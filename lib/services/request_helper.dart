@@ -1,6 +1,5 @@
 import 'package:movieflix/models/movie_details_model.dart';
 import 'package:movieflix/models/movie_model.dart';
-import 'package:movieflix/models/page_model.dart';
 import 'package:movieflix/services/networking.dart';
 
 import '../constants.dart';
@@ -13,7 +12,7 @@ class RequestHelper {
     List<Movie> movies = [];
     try {
       NetworkHelper networkHelper = NetworkHelper(
-          '$openMovieURL/search/movie?api_key=d023c237ec71d6a50e32e635042fb18f&language=en-US&query=$movie&page=$pageNumber&include_adult=false');
+          '$openMovieURL/search/movie?api_key=$apiKey&language=en-US&query=$movie&page=$pageNumber&include_adult=false');
 
       var moviesData = await networkHelper.getData();
       Map<String, dynamic> response = moviesData;
@@ -31,19 +30,21 @@ class RequestHelper {
     List<Movie> movies = [];
 
     NetworkHelper networkHelper = NetworkHelper(
-        '$openMovieURL/movie/popular?api_key=d023c237ec71d6a50e32e635042fb18f&language=en-US&page=$pageNumber');
+        '$openMovieURL/movie/popular?api_key=$apiKey&language=en-US&page=$pageNumber');
 
     var moviesData = await networkHelper.getData();
     Map<String, dynamic> response = moviesData;
     List<dynamic> result = response["results"];
-    result.forEach((element) => movies.add(Movie.fromJson(element)));
+    for (var element in result) {
+      movies.add(Movie.fromJson(element));
+    }
     _totalPage = response["total_pages"];
     return movies;
   }
 
   Future<int> getTotalPagesSearchMovies(String movie) async {
     NetworkHelper networkHelper = NetworkHelper(
-        '$openMovieURL/search/movie?api_key=d023c237ec71d6a50e32e635042fb18f&language=en-US&query=$movie&page=1&include_adult=false');
+        '$openMovieURL/search/movie?api_key=$apiKey&language=en-US&query=$movie&page=1&include_adult=false');
 
     var moviesData = await networkHelper.getData();
     Map<String, dynamic> response = moviesData;
@@ -54,7 +55,7 @@ class RequestHelper {
 
   Future<int> getTotalPagesTopMovie() async {
     NetworkHelper networkHelper = NetworkHelper(
-        '$openMovieURL/movie/popular?api_key=d023c237ec71d6a50e32e635042fb18f&language=en-US&page=1');
+        '$openMovieURL/movie/popular?api_key=$apiKey&language=en-US&page=1');
 
     var moviesData = await networkHelper.getData();
     Map<String, dynamic> response = moviesData;
@@ -83,7 +84,9 @@ class RequestHelper {
     var moviesData = await networkHelper.getData();
     Map<String, dynamic> response = moviesData;
     List<dynamic> result = response["results"];
-    result.forEach((element) => movies.add(Movie.fromJson(element)));
+    for (var element in result) {
+      movies.add(Movie.fromJson(element));
+    }
     print(movies.length);
     return movies;
   }

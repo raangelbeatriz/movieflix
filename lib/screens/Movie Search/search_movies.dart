@@ -73,9 +73,6 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                             ),
                             onChanged: (value) async {
                               itemSearch = value;
-                              /*if (itemSearch != null && itemSearch != "") {
-                                searchMoviesViewModel.fetchMoviesData(itemSearch!); 
-                              }*/
                             },
                           ),
                         ),
@@ -92,12 +89,12 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                                 .fetchMoviesData(itemSearch ?? "");
                           },
                           child: Container(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
                               color: ksecondColor,
                               borderRadius: BorderRadius.circular(9),
                             ),
-                            child: Icon(Icons.search),
+                            child: const Icon(Icons.search),
                           ),
                         ),
                       ),
@@ -105,7 +102,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                   ],
                 ),
               ),
-              Container(
+              SizedBox(
                 height: size.height * 0.8,
                 width: size.width,
                 child: Consumer<SearchMoviesViewModel>(
@@ -154,7 +151,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                         ),
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                   },
                 ),
@@ -166,37 +163,3 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
     );
   }
 }
-
-/* 
-GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 200,
-                                  childAspectRatio: 3 / 2,
-                                  crossAxisSpacing: size.width * 0.01,
-                                  mainAxisSpacing: size.height * 0.01),
-                          itemCount: value.posterMovies.length,
-                          itemBuilder: (BuildContext ctx, index) {
-                            return Container(
-                              alignment: Alignment.center,
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return MovieDetailsPage(
-                                          id: value.posterMovies[index].id!,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: value.posterMovies[index],
-                              ),
-                            );
-                          },
-                        ), 
-                        
-                        */
-

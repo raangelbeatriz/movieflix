@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:movieflix/models/movie_details_model.dart';
 import 'package:movieflix/services/request_helper.dart';

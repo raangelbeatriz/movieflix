@@ -27,7 +27,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: size.height * 0.65,
               child: FutureBuilder<MovieDetailsModel>(
                 future: movieDetailsViewModel
@@ -55,7 +55,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                 },
               ),
             ),
-            Container(
+            SizedBox(
               height: size.height * 0.35,
               child: FutureBuilder<MovieDetailsModel>(
                 future: movieDetailsViewModel
