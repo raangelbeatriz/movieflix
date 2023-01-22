@@ -3,7 +3,6 @@ import 'package:movieflix/core/components/poster_movie.dart';
 import 'package:movieflix/core/components/poster_trending_movie.dart';
 import 'package:movieflix/models/movie_model.dart';
 import 'package:movieflix/repository/movie_repository.dart';
-import 'package:movieflix/services/request_helper.dart';
 
 class HomePageViewModel extends ChangeNotifier {
   final MovieRepository _movieRepository;
@@ -21,7 +20,7 @@ class HomePageViewModel extends ChangeNotifier {
     try {
       isLoadingMovies = true;
       page++;
-      List<Movie> movies = await RequestHelper().getTopMovies(page);
+      List<Movie> movies = await _movieRepository.getTopMovies(page);
       totalPages = await _movieRepository.getTotalPagesTopMovie();
       if (movies.isNotEmpty) {
         for (Movie item in movies) {
