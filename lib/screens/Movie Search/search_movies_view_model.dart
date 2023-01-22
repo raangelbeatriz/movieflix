@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:intl/intl.dart';
-import 'package:movieflix/components/poster_search.dart';
+import 'package:movieflix/core/components/poster_search.dart';
 import 'package:movieflix/models/movie_model.dart';
 import 'package:movieflix/repository/movie_repository.dart';
+
+import '../../core/Fornatters/formatters.dart';
 
 class SearchMoviesViewModel extends ChangeNotifier {
   final MovieRepository _movieRepository;
@@ -32,7 +33,7 @@ class SearchMoviesViewModel extends ChangeNotifier {
         totalPages = await _movieRepository.getTotalPagesSearchMovies(movie);
         if (movies.isNotEmpty) {
           for (Movie item in movies) {
-            String date = dateFormater(item.releaseDate);
+            String date = Formatters.dateFormater(item.releaseDate);
             moviesLenght++;
             print(item.title);
             posterMovies.addAll(
@@ -96,14 +97,5 @@ class SearchMoviesViewModel extends ChangeNotifier {
       deletePosterMovies();
       notifyListeners();
     }
-  }
-
-  String dateFormater(DateTime? date) {
-    var formatter = DateFormat('dd-MM-yyyy');
-    String formattedDate = "";
-    if (date != null) {
-      formattedDate = formatter.format(date);
-    }
-    return formattedDate;
   }
 }

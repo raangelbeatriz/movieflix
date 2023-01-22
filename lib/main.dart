@@ -10,6 +10,8 @@ import 'package:movieflix/screens/Home%20Page/home_view_model.dart';
 import 'package:movieflix/screens/Movie%20Search/search_movies_view_model.dart';
 import 'package:provider/provider.dart';
 
+import 'core/Routes/routes.dart';
+
 void main() {
   runApp(
     MultiProvider(
@@ -51,8 +53,8 @@ class MovieFlix extends StatelessWidget {
         body: HomePage(),
       ),
       routes: <String, WidgetBuilder>{
-        '/homePage': (_) => const HomePage(),
-        '/searchMovies': (_) => const SearchMoviesPage(),
+        Routes.home: (_) => const HomePage(),
+        Routes.searchMovies: (_) => const SearchMoviesPage(),
       },
     );
   }

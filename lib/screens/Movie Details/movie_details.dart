@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/components/super_poster.dart';
-import 'package:movieflix/components/synopis_widget.dart';
+import 'package:movieflix/core/components/super_poster.dart';
+import 'package:movieflix/core/components/synopis_widget.dart';
 import 'package:movieflix/models/movie_details_model.dart';
 import 'package:movieflix/screens/Movie%20Details/movie_details_view_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../core/Fornatters/formatters.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   const MovieDetailsPage({Key? key, required this.id}) : super(key: key);
@@ -45,7 +47,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasData) {
-                      String date = movieDetailsViewModel.dateFormater(
+                      String date = Formatters.dateFormater(
                           movieDetailsViewModel.movie.releaseDate!);
                       return SuperPosterWidget(
                         ranking: movieDetailsViewModel.movie.voteAverage,

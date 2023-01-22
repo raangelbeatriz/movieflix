@@ -14,13 +14,4 @@ class MovieDetailsViewModel extends ChangeNotifier {
     movie = await _movieRepository.getMovie(id);
     return movie;
   }
-
-  String dateFormater(DateTime? date) {
-    var formatter = DateFormat('dd-MM-yyyy');
-    String formattedDate = "";
-    if (date != null) {
-      formattedDate = formatter.format(date);
-    }
-    return formattedDate;
-  }
 }
