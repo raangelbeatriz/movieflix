@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movieflix/components/super_poster.dart';
 import 'package:movieflix/components/synopis_widget.dart';
 import 'package:movieflix/models/movie_details_model.dart';
-import 'package:movieflix/screens/Movie%20Details/movie_details_viewmodel.dart';
+import 'package:movieflix/screens/Movie%20Details/movie_details_view_model.dart';
+import 'package:provider/provider.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   const MovieDetailsPage({Key? key, required this.id}) : super(key: key);
@@ -12,11 +13,20 @@ class MovieDetailsPage extends StatefulWidget {
 }
 
 class _MovieDetailsPageState extends State<MovieDetailsPage> {
-  final MovieDetailsViewModel movieDetailsViewModel = MovieDetailsViewModel();
+  late MovieDetailsViewModel movieDetailsViewModel;
   @override
   void initState() {
-    movieDetailsViewModel.fetchMovieDetail(widget.id.toString());
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      movieDetailsViewModel.fetchMovieDetail(widget.id.toString());
+    });
+
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    movieDetailsViewModel = context.read<MovieDetailsViewModel>();
+    super.didChangeDependencies();
   }
 
   @override

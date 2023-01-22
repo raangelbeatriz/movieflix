@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:movieflix/components/poster_search.dart';
 import 'package:movieflix/models/movie_model.dart';
-import 'package:movieflix/services/request_helper.dart';
+import 'package:movieflix/repository/movie_repository.dart';
 
 class SearchMoviesViewModel extends ChangeNotifier {
+  final MovieRepository _movieRepository;
+
   List<PosterSearch> posterMovies = [];
 
   bool isLoadingMovies = false;
@@ -17,14 +19,17 @@ class SearchMoviesViewModel extends ChangeNotifier {
   bool restart = false;
   bool specialLoading = false;
 
+  SearchMoviesViewModel({required MovieRepository movieRepository})
+      : _movieRepository = movieRepository;
+
   Future<void> fetchMoviesData(String movie) async {
     checkSearchState(movie, oldMovie);
     movie = setMovieString(movie);
     try {
       if (lastPage == false) {
         isLoadingMovies = true;
-        List<Movie> movies = await RequestHelper().searchMovie(movie, page);
-        totalPages = await RequestHelper().getTotalPagesSearchMovies(movie);
+        List<Movie> movies = await _movieRepository.searchMovie(movie, page);
+        totalPages = await _movieRepository.getTotalPagesSearchMovies(movie);
         if (movies.isNotEmpty) {
           for (Movie item in movies) {
             String date = dateFormater(item.releaseDate);

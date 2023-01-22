@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movieflix/constants.dart';
 import 'package:movieflix/screens/Movie%20Details/movie_details.dart';
 import 'package:movieflix/screens/Movie%20Search/search_movies.dart';
-import 'package:movieflix/screens/Home%20Page/home_page_viewmodel.dart';
+import 'package:movieflix/screens/Home%20Page/home_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

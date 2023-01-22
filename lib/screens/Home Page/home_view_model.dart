@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:movieflix/components/poster_movie.dart';
 import 'package:movieflix/components/poster_trending_movie.dart';
 import 'package:movieflix/models/movie_model.dart';
+import 'package:movieflix/repository/movie_repository.dart';
 import 'package:movieflix/services/request_helper.dart';
 
 class HomePageViewModel extends ChangeNotifier {
+  final MovieRepository _movieRepository;
   List<PosterMovie> posterMovies = [];
   List<PosterTrendingMovie> posterTrendingMovies = [];
   bool isLoadingTrendingMovies = false;
@@ -12,12 +14,15 @@ class HomePageViewModel extends ChangeNotifier {
   int page = 0;
   int totalPages = 0;
 
+  HomePageViewModel({required MovieRepository movieRepository})
+      : _movieRepository = movieRepository;
+
   Future<void> fetchPopularMovies() async {
     try {
       isLoadingMovies = true;
       page++;
       List<Movie> movies = await RequestHelper().getTopMovies(page);
-      totalPages = await RequestHelper().getTotalPagesTopMovie();
+      totalPages = await _movieRepository.getTotalPagesTopMovie();
       if (movies.isNotEmpty) {
         for (Movie item in movies) {
           posterMovies
@@ -34,7 +39,7 @@ class HomePageViewModel extends ChangeNotifier {
   Future<void> fetchUpcomingMovies() async {
     try {
       isLoadingTrendingMovies = true;
-      List<Movie> trendingMovies = await RequestHelper().getUpcomingMovies();
+      List<Movie> trendingMovies = await _movieRepository.getUpcomingMovies();
       if (trendingMovies.isNotEmpty) {
         if (trendingMovies.length < 5) {
           for (Movie item in trendingMovies) {

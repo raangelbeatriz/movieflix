@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movieflix/constants.dart';
 import 'package:movieflix/screens/Movie%20Details/movie_details.dart';
-import 'package:movieflix/screens/Movie%20Search/search_movies_viewmodel.dart';
+import 'package:movieflix/screens/Movie%20Search/search_movies_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SearchMoviesPage extends StatefulWidget {
