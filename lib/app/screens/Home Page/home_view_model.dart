@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:movieflix/core/components/poster_movie.dart';
-import 'package:movieflix/core/components/poster_trending_movie.dart';
-import 'package:movieflix/models/movie_model.dart';
-import 'package:movieflix/repository/movie_repository.dart';
+
+import '../../core/components/poster_movie.dart';
+import '../../core/components/poster_trending_movie.dart';
+import '../../models/movie_model.dart';
+import '../../repository/movie_repository.dart';
 
 class HomePageViewModel extends ChangeNotifier {
   final MovieRepository _movieRepository;

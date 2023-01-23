@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:movieflix/models/movie_model.dart';
+import 'movie_model.dart';
 
 Page pageFromJson(String str) => Page.fromJson(json.decode(str));
 

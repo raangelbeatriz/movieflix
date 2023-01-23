@@ -1,9 +1,8 @@
-import 'package:movieflix/models/movie_model.dart';
-import 'package:movieflix/models/movie_details_model.dart';
-import 'package:movieflix/repository/movie_repository.dart';
-
 import '../constants.dart';
+import '../models/movie_details_model.dart';
+import '../models/movie_model.dart';
 import '../services/networking.dart';
+import 'movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
   @override
@@ -84,8 +83,8 @@ class MovieRepositoryImpl implements MovieRepository {
       var moviesData = await networkHelper.getData();
       Map<String, dynamic> response = moviesData;
       List<dynamic> result = response["results"];
-      for (int i = 0; i < result.length; i++) {
-        movies.add(Movie.fromJson(result[i]));
+      for (var element in result) {
+        movies.add(Movie.fromJson(element));
       }
     } catch (e) {
       Exception(e);

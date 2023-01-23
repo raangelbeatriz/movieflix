@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/core/components/super_poster.dart';
-import 'package:movieflix/core/components/synopis_widget.dart';
-import 'package:movieflix/models/movie_details_model.dart';
-import 'package:movieflix/screens/Movie%20Details/movie_details_view_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/Fornatters/formatters.dart';
+import '../../core/Formatters/formatters.dart';
+import '../../core/components/super_poster.dart';
+import '../../core/components/synopis_widget.dart';
+import '../../models/movie_details_model.dart';
+import 'movie_details_view_model.dart';
 
 class MovieDetailsPage extends StatefulWidget {
   const MovieDetailsPage({Key? key, required this.id}) : super(key: key);

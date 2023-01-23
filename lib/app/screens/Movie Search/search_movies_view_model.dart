@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:movieflix/core/components/poster_search.dart';
-import 'package:movieflix/models/movie_model.dart';
-import 'package:movieflix/repository/movie_repository.dart';
 
-import '../../core/Fornatters/formatters.dart';
+import '../../core/Formatters/formatters.dart';
+import '../../core/components/poster_search.dart';
+import '../../models/movie_model.dart';
+import '../../repository/movie_repository.dart';
 
 class SearchMoviesViewModel extends ChangeNotifier {
   final MovieRepository _movieRepository;

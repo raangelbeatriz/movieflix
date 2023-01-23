@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/constants.dart';
-import 'package:movieflix/screens/Movie%20Details/movie_details.dart';
-import 'package:movieflix/screens/Home%20Page/home_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../constants.dart';
 import '../../core/Routes/routes.dart';
+import '../Movie Details/movie_details.dart';
+import 'home_view_model.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Center(
                   child: SizedBox(
-                    height: size.height * 0.35, //0.35
+                    height: size.height * 0.35,
                     width: size.width,
                     child: Consumer<HomePageViewModel>(
                       builder: (context, value, child) {
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: size.height * 0.38, //300
+                  height: size.height * 0.38,
                   width: size.width,
                   child: Consumer<HomePageViewModel>(
                     builder: (context, value, child) {

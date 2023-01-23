@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/core/components/text_search_poster.dart';
+
+import 'text_search_poster.dart';
 
 class PosterSearch extends StatelessWidget {
   const PosterSearch({

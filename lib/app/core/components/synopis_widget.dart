@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/core/components/title_widget.dart';
+
+import 'title_widget.dart';
 
 class SynopsisWidget extends StatelessWidget {
   const SynopsisWidget({

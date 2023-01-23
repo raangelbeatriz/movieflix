@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movieflix/constants.dart';
-import 'package:movieflix/repository/movie_repository.dart';
-import 'package:movieflix/repository/movie_repository_impl.dart';
-import 'package:movieflix/screens/Home%20Page/home_page.dart';
-import 'package:movieflix/screens/Movie%20Details/movie_details_view_model.dart';
-import 'package:movieflix/screens/Movie%20Search/search_movies.dart';
-import 'package:movieflix/screens/Home%20Page/home_view_model.dart';
-import 'package:movieflix/screens/Movie%20Search/search_movies_view_model.dart';
 import 'package:provider/provider.dart';
 
-import 'core/Routes/routes.dart';
+import 'app/constants.dart';
+import 'app/core/Routes/routes.dart';
+import 'app/repository/movie_repository.dart';
+import 'app/repository/movie_repository_impl.dart';
+import 'app/screens/Home Page/home_page.dart';
+import 'app/screens/Home Page/home_view_model.dart';
+import 'app/screens/Movie Details/movie_details_view_model.dart';
+import 'app/screens/Movie Search/search_movies.dart';
+import 'app/screens/Movie Search/search_movies_view_model.dart';
 
 void main() {
   runApp(

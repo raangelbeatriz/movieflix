@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/constants.dart';
-import 'package:movieflix/screens/Movie%20Details/movie_details.dart';
-import 'package:movieflix/screens/Movie%20Search/search_movies_view_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../constants.dart';
+import '../Movie Details/movie_details.dart';
+import 'search_movies_view_model.dart';
 
 class SearchMoviesPage extends StatefulWidget {
   const SearchMoviesPage({Key? key}) : super(key: key);
