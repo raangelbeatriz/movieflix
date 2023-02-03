@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieflix/app/core/ui/helpers/messages.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with Messages {
   late HomePageViewModel homePageViewModel;
   PageController pageController = PageController();
 
@@ -23,6 +24,11 @@ class _HomePageState extends State<HomePage> {
       homePageViewModel = context.read<HomePageViewModel>();
       homePageViewModel.fetchPopularMovies();
       homePageViewModel.fetchUpcomingMovies();
+      homePageViewModel.addListener(() {
+        if (homePageViewModel.errorMessage.isNotEmpty) {
+          showError(homePageViewModel.errorMessage);
+        }
+      });
     });
   }
 
@@ -67,11 +73,11 @@ class _HomePageState extends State<HomePage> {
                     width: size.width,
                     child: Consumer<HomePageViewModel>(
                       builder: (context, value, child) {
-                        if (value.isLoadingMovies) {
+                        if (value.isLoadingTrendingMovies) {
                           return const Center(
                             child: CircularProgressIndicator(),
                           );
-                        } else if (value.posterMovies.isNotEmpty) {
+                        } else if (value.posterTrendingMovies.isNotEmpty) {
                           return PageView.builder(
                             controller: pageController,
                             itemCount: value.posterTrendingMovies.length,
@@ -82,8 +88,8 @@ class _HomePageState extends State<HomePage> {
                           );
                         } else {
                           return const Center(
-                            child: CircularProgressIndicator(),
-                          );
+                              child:
+                                  Text('ERROR WHILE LOADING UPCOMING MOVIES'));
                         }
                       },
                     ),
@@ -139,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                         );
                       } else {
                         return const Center(
-                          child: CircularProgressIndicator(),
+                          child: Text('ERROR WHILE LOADING POPULAR MOVIES'),
                         );
                       }
                     },

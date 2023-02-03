@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieflix/app/core/ui/helpers/messages.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/formatters/formatters.dart';
@@ -13,13 +14,18 @@ class MovieDetailsPage extends StatefulWidget {
   State<MovieDetailsPage> createState() => _MovieDetailsPageState();
 }
 
-class _MovieDetailsPageState extends State<MovieDetailsPage> {
+class _MovieDetailsPageState extends State<MovieDetailsPage> with Messages {
   late MovieDetailsViewModel movieDetailsViewModel;
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       movieDetailsViewModel = context.read<MovieDetailsViewModel>();
+      movieDetailsViewModel.addListener(() {
+        if (movieDetailsViewModel.errorMessage.isNotEmpty) {
+          showError(movieDetailsViewModel.errorMessage);
+        }
+      });
       movieDetailsViewModel.fetchMovieDetail(widget.id.toString());
     });
   }
@@ -34,29 +40,35 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
             child: CircularProgressIndicator(),
           );
         } else {
-          String date = Formatters.dateFormater(
-              movieDetailsViewModel.movie?.releaseDate!);
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: size.height * 0.65,
-                  child: SuperPosterWidget(
-                    ranking: movieDetailsViewModel.movie!.voteAverage,
-                    releaseDate: date,
-                    posterPath: movieDetailsViewModel.movie!.posterPath,
+          if (value.movie != null) {
+            String date = Formatters.dateFormater(
+                movieDetailsViewModel.movie?.releaseDate!);
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: size.height * 0.65,
+                    child: SuperPosterWidget(
+                      ranking: movieDetailsViewModel.movie!.voteAverage,
+                      releaseDate: date,
+                      posterPath: movieDetailsViewModel.movie!.posterPath,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: size.height * 0.35,
-                  child: SynopsisWidget(
-                    text: movieDetailsViewModel.movie!.overview,
-                    movieTitle: movieDetailsViewModel.movie!.title,
+                  SizedBox(
+                    height: size.height * 0.35,
+                    child: SynopsisWidget(
+                      text: movieDetailsViewModel.movie!.overview,
+                      movieTitle: movieDetailsViewModel.movie!.title,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          );
+                ],
+              ),
+            );
+          } else {
+            return const Center(
+              child: Text('ERROR WHILE GETTING MOVIE'),
+            );
+          }
         }
       }),
     );

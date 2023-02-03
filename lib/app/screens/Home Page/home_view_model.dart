@@ -9,16 +9,18 @@ class HomePageViewModel extends ChangeNotifier {
   final MovieRepository _movieRepository;
   List<PosterMovie> posterMovies = [];
   List<PosterTrendingMovie> posterTrendingMovies = [];
-  bool isLoadingTrendingMovies = false;
-  bool isLoadingMovies = false;
+  bool isLoadingTrendingMovies = true;
+  bool isLoadingMovies = true;
   int page = 0;
   int totalPages = 0;
+  String errorMessage = '';
 
   HomePageViewModel({required MovieRepository movieRepository})
       : _movieRepository = movieRepository;
 
   Future<void> fetchPopularMovies() async {
     try {
+      errorMessage = '';
       isLoadingMovies = true;
       page++;
       List<Movie> movies = await _movieRepository.getTopMovies(page);
@@ -31,6 +33,8 @@ class HomePageViewModel extends ChangeNotifier {
       }
       isLoadingMovies = false;
     } catch (e) {
+      errorMessage = 'Error while loading popular Movies';
+      isLoadingMovies = false;
       print(e);
     }
     notifyListeners();
@@ -38,6 +42,7 @@ class HomePageViewModel extends ChangeNotifier {
 
   Future<void> fetchUpcomingMovies() async {
     try {
+      errorMessage = '';
       isLoadingTrendingMovies = true;
       List<Movie> trendingMovies = await _movieRepository.getUpcomingMovies();
       if (trendingMovies.isNotEmpty) {
@@ -58,7 +63,8 @@ class HomePageViewModel extends ChangeNotifier {
       }
       isLoadingTrendingMovies = false;
     } catch (e) {
-      print(e);
+      isLoadingTrendingMovies = false;
+      errorMessage = 'Error while loading upcoming movies';
     }
     notifyListeners();
   }

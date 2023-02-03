@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieflix/app/core/ui/helpers/messages.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
@@ -11,7 +12,7 @@ class SearchMoviesPage extends StatefulWidget {
   State<SearchMoviesPage> createState() => _SearchMoviesPageState();
 }
 
-class _SearchMoviesPageState extends State<SearchMoviesPage> {
+class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
   late SearchMoviesViewModel searchMoviesViewModel;
   @override
   void initState() {
@@ -20,6 +21,11 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       searchMoviesViewModel =
           Provider.of<SearchMoviesViewModel>(context, listen: false);
+      searchMoviesViewModel.addListener(() {
+        if (searchMoviesViewModel.errorMessage.isNotEmpty) {
+          showError(searchMoviesViewModel.errorMessage);
+        }
+      });
     });
   }
 
@@ -134,7 +140,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                         ),
                       );
                     } else {
-                      return const Center(child: CircularProgressIndicator());
+                      return const SizedBox.shrink();
                     }
                   },
                 ),

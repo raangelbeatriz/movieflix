@@ -7,14 +7,21 @@ class MovieDetailsViewModel extends ChangeNotifier {
   final MovieRepository _movieRepository;
   MovieDetailsModel? movie;
   bool isLoading = true;
+  String errorMessage = '';
 
   MovieDetailsViewModel({required MovieRepository movieRepository})
       : _movieRepository = movieRepository;
 
   Future<void> fetchMovieDetail(String id) async {
-    isLoading = true;
-    movie = await _movieRepository.getMovie(id);
-    isLoading = false;
+    try {
+      errorMessage = '';
+      isLoading = true;
+      movie = await _movieRepository.getMovie(id);
+      isLoading = false;
+    } catch (e) {
+      isLoading = false;
+      errorMessage = 'Error while fetching Movie data';
+    }
     notifyListeners();
   }
 }

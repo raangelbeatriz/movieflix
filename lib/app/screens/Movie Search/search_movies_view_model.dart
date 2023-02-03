@@ -18,11 +18,13 @@ class SearchMoviesViewModel extends ChangeNotifier {
   bool lastPage = false;
   int moviesLenght = 0;
   bool restart = false;
+  String errorMessage = '';
 
   SearchMoviesViewModel({required MovieRepository movieRepository})
       : _movieRepository = movieRepository;
 
   Future<void> fetchMoviesData(String movie) async {
+    errorMessage = '';
     checkSearchState(movie, oldMovie);
     movie = setMovieString(movie);
     try {
@@ -57,7 +59,8 @@ class SearchMoviesViewModel extends ChangeNotifier {
         }
       }
     } catch (e) {
-      print(e);
+      isLoadingMovies = false;
+      errorMessage = 'Error while searching for movies';
     }
     notifyListeners();
   }
