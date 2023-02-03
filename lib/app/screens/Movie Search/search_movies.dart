@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
+import '../../core/Routes/routes.dart';
 import '../Movie Details/movie_details.dart';
 import 'search_movies_view_model.dart';
 
@@ -136,16 +137,9 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                                 onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return MovieDetailsPage(
-                                          id: value.posterMovies[index].id!,
-                                        );
-                                      },
-                                    ),
-                                  );
+                                  Navigator.pushNamed(
+                                      context, Routes.movieDetails,
+                                      arguments: value.posterMovies[index].id!);
                                 },
                                 child: value.posterMovies[index]);
                           },

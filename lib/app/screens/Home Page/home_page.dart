@@ -4,7 +4,6 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../constants.dart';
 import '../../core/Routes/routes.dart';
-import '../Movie Details/movie_details.dart';
 import 'home_view_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -82,18 +81,10 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return MovieDetailsPage(
-                                            id: value
-                                                .posterTrendingMovies[index]
-                                                .id!,
-                                          );
-                                        },
-                                      ),
-                                    );
+                                    Navigator.pushNamed(
+                                        context, Routes.movieDetails,
+                                        arguments: value
+                                            .posterTrendingMovies[index].id!);
                                   },
                                   child: value.posterTrendingMovies[index]);
                             },
@@ -151,16 +142,10 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) {
-                                          return MovieDetailsPage(
-                                            id: value.posterMovies[index].id!,
-                                          );
-                                        },
-                                      ),
-                                    );
+                                    Navigator.pushNamed(
+                                        context, Routes.movieDetails,
+                                        arguments:
+                                            value.posterMovies[index].id!);
                                   },
                                   child: value.posterMovies[index]);
                             },
