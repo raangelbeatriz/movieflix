@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/Formatters/formatters.dart';
+import '../../core/formatters/formatters.dart';
 import '../../core/components/super_poster.dart';
 import '../../core/components/synopis_widget.dart';
-import '../../models/movie_details_model.dart';
 import 'movie_details_view_model.dart';
 
 class MovieDetailsPage extends StatefulWidget {
@@ -18,79 +17,48 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
   late MovieDetailsViewModel movieDetailsViewModel;
   @override
   void initState() {
+    super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      movieDetailsViewModel = context.read<MovieDetailsViewModel>();
       movieDetailsViewModel.fetchMovieDetail(widget.id.toString());
     });
-
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    movieDetailsViewModel = context.read<MovieDetailsViewModel>();
-    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: size.height * 0.65,
-              child: FutureBuilder<MovieDetailsModel>(
-                future: movieDetailsViewModel
-                    .fetchMovieDetail(widget.id.toString()),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasData) {
-                      String date = Formatters.dateFormater(
-                          movieDetailsViewModel.movie.releaseDate!);
-                      return SuperPosterWidget(
-                        ranking: movieDetailsViewModel.movie.voteAverage,
-                        releaseDate: date,
-                        posterPath: movieDetailsViewModel.movie.posterPath,
-                      );
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
+      body: Consumer<MovieDetailsViewModel>(builder: (context, value, child) {
+        if (value.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else {
+          String date = Formatters.dateFormater(
+              movieDetailsViewModel.movie?.releaseDate!);
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: size.height * 0.65,
+                  child: SuperPosterWidget(
+                    ranking: movieDetailsViewModel.movie!.voteAverage,
+                    releaseDate: date,
+                    posterPath: movieDetailsViewModel.movie!.posterPath,
+                  ),
+                ),
+                SizedBox(
+                  height: size.height * 0.35,
+                  child: SynopsisWidget(
+                    text: movieDetailsViewModel.movie!.overview,
+                    movieTitle: movieDetailsViewModel.movie!.title,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: size.height * 0.35,
-              child: FutureBuilder<MovieDetailsModel>(
-                future: movieDetailsViewModel
-                    .fetchMovieDetail(widget.id.toString()),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return SingleChildScrollView(
-                      child: SynopsisWidget(
-                        text: movieDetailsViewModel.movie.overview,
-                        movieTitle: movieDetailsViewModel.movie.title,
-                      ),
-                    );
-                  } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+          );
+        }
+      }),
     );
   }
 }

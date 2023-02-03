@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
-import '../../core/Routes/routes.dart';
-import '../Movie Details/movie_details.dart';
 import 'search_movies_view_model.dart';
 
 class SearchMoviesPage extends StatefulWidget {
@@ -17,16 +15,12 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
   late SearchMoviesViewModel searchMoviesViewModel;
   @override
   void initState() {
-    Provider.of<SearchMoviesViewModel>(context, listen: false)
-        .fetchMoviesData("");
     super.initState();
-  }
 
-  @override
-  void didChangeDependencies() {
-    searchMoviesViewModel =
-        Provider.of<SearchMoviesViewModel>(context, listen: false);
-    super.didChangeDependencies();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      searchMoviesViewModel =
+          Provider.of<SearchMoviesViewModel>(context, listen: false);
+    });
   }
 
   @override
@@ -84,7 +78,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                       flex: 1,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: GestureDetector(
+                        child: InkWell(
                           onTap: () async {
                             print("testando $itemSearch");
                             await searchMoviesViewModel
@@ -110,9 +104,9 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                 child: Consumer<SearchMoviesViewModel>(
                   builder: (context, value, child) {
                     if (value.isLoadingMovies && value.searching) {
-                      return const CircularProgressIndicator();
+                      return const Center(child: CircularProgressIndicator());
                     } else if (value.searching == false) {
-                      return Container();
+                      return const SizedBox.shrink();
                     } else if (value.posterMovies.isNotEmpty) {
                       return NotificationListener<ScrollNotification>(
                         onNotification: (notification) {
@@ -135,18 +129,12 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> {
                           itemCount: value.posterMovies.length,
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
-                            return GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                      context, Routes.movieDetails,
-                                      arguments: value.posterMovies[index].id!);
-                                },
-                                child: value.posterMovies[index]);
+                            return value.posterMovies[index];
                           },
                         ),
                       );
                     } else {
-                      return const CircularProgressIndicator();
+                      return const Center(child: CircularProgressIndicator());
                     }
                   },
                 ),

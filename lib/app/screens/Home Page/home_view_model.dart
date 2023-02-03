@@ -26,7 +26,7 @@ class HomePageViewModel extends ChangeNotifier {
       if (movies.isNotEmpty) {
         for (Movie item in movies) {
           posterMovies
-              .addAll({PosterMovie(id: item.id, poster: item.posterPath)});
+              .addAll({PosterMovie(id: item.id!, poster: item.posterPath)});
         }
       }
       isLoadingMovies = false;

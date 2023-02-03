@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../core/Formatters/formatters.dart';
+import '../../core/formatters/formatters.dart';
 import '../../core/components/poster_search.dart';
 import '../../models/movie_model.dart';
 import '../../repository/movie_repository.dart';
@@ -18,7 +18,6 @@ class SearchMoviesViewModel extends ChangeNotifier {
   bool lastPage = false;
   int moviesLenght = 0;
   bool restart = false;
-  bool specialLoading = false;
 
   SearchMoviesViewModel({required MovieRepository movieRepository})
       : _movieRepository = movieRepository;
@@ -39,7 +38,7 @@ class SearchMoviesViewModel extends ChangeNotifier {
             posterMovies.addAll(
               {
                 PosterSearch(
-                  id: item.id,
+                  id: item.id!,
                   poster: item.backdropPath,
                   releaseDate: date,
                   title: item.title,
@@ -48,14 +47,11 @@ class SearchMoviesViewModel extends ChangeNotifier {
             );
           }
         }
-        specialLoading = false;
         isLoadingMovies = false;
         int totalPagesPlus = totalPages + 1;
         if (page == totalPagesPlus) {
           lastPage = true;
         }
-        print(
-            "chamadas Movies Length =  $moviesLenght, page = $page e total page = $totalPages");
         if (movies != "") {
           page++;
         }

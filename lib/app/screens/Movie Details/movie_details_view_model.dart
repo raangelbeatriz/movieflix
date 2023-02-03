@@ -5,13 +5,16 @@ import '../../repository/movie_repository.dart';
 
 class MovieDetailsViewModel extends ChangeNotifier {
   final MovieRepository _movieRepository;
-  MovieDetailsModel movie = MovieDetailsModel();
+  MovieDetailsModel? movie;
+  bool isLoading = true;
 
   MovieDetailsViewModel({required MovieRepository movieRepository})
       : _movieRepository = movieRepository;
 
-  Future<MovieDetailsModel> fetchMovieDetail(String id) async {
+  Future<void> fetchMovieDetail(String id) async {
+    isLoading = true;
     movie = await _movieRepository.getMovie(id);
-    return movie;
+    isLoading = false;
+    notifyListeners();
   }
 }

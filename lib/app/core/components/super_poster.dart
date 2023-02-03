@@ -29,7 +29,6 @@ class SuperPosterWidget extends StatelessWidget {
           ),
         ),
         Container(
-          //height: 500,
           decoration: const BoxDecoration(
             color: Colors.white,
             gradient: LinearGradient(
@@ -44,27 +43,28 @@ class SuperPosterWidget extends StatelessWidget {
           child: GoBackWidget(),
         ),
         Positioned(
-            bottom: 20,
-            left: 15,
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text('Rankings: $ranking'),
-                const SizedBox(
-                  width: 20,
-                ),
-                SizedBox(
-                  width: 200,
-                  child: TextSearchPoster(text: "Release Date: $releaseDate"),
-                ),
-              ],
-            ))
+          bottom: 20,
+          left: 15,
+          child: Row(
+            children: [
+              const Icon(
+                Icons.star,
+                color: Colors.yellow,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Text('Rankings: $ranking'),
+              const SizedBox(
+                width: 20,
+              ),
+              SizedBox(
+                width: 200,
+                child: TextSearchPoster(text: "Release Date: $releaseDate"),
+              ),
+            ],
+          ),
+        )
       ],
     );
   }

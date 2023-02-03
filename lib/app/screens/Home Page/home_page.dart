@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../constants.dart';
-import '../../core/Routes/routes.dart';
+import '../../core/routes/routes.dart';
 import 'home_view_model.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,16 +18,12 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    Provider.of<HomePageViewModel>(context, listen: false).fetchPopularMovies();
-    Provider.of<HomePageViewModel>(context, listen: false)
-        .fetchUpcomingMovies();
     super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    homePageViewModel = context.read<HomePageViewModel>();
-    super.didChangeDependencies();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      homePageViewModel = context.read<HomePageViewModel>();
+      homePageViewModel.fetchPopularMovies();
+      homePageViewModel.fetchUpcomingMovies();
+    });
   }
 
   @override
@@ -72,25 +68,22 @@ class _HomePageState extends State<HomePage> {
                     child: Consumer<HomePageViewModel>(
                       builder: (context, value, child) {
                         if (value.isLoadingMovies) {
-                          return const CircularProgressIndicator();
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
                         } else if (value.posterMovies.isNotEmpty) {
                           return PageView.builder(
                             controller: pageController,
                             itemCount: value.posterTrendingMovies.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, Routes.movieDetails,
-                                        arguments: value
-                                            .posterTrendingMovies[index].id!);
-                                  },
-                                  child: value.posterTrendingMovies[index]);
+                              return value.posterTrendingMovies[index];
                             },
                           );
                         } else {
-                          return const CircularProgressIndicator();
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
                         }
                       },
                     ),
@@ -123,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                   child: Consumer<HomePageViewModel>(
                     builder: (context, value, child) {
                       if (value.isLoadingMovies) {
-                        return const CircularProgressIndicator();
+                        return const Center(child: CircularProgressIndicator());
                       } else if (value.posterMovies.isNotEmpty) {
                         return NotificationListener<ScrollNotification>(
                           onNotification: (notification) {
@@ -133,26 +126,21 @@ class _HomePageState extends State<HomePage> {
                                   value.page < value.totalPages) {
                                 value.fetchPopularMovies();
                               }
-                            } else {}
+                            }
                             return true;
                           },
                           child: ListView.builder(
                             itemCount: value.posterMovies.length,
                             scrollDirection: Axis.horizontal,
                             itemBuilder: (context, index) {
-                              return GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, Routes.movieDetails,
-                                        arguments:
-                                            value.posterMovies[index].id!);
-                                  },
-                                  child: value.posterMovies[index]);
+                              return value.posterMovies[index];
                             },
                           ),
                         );
                       } else {
-                        return const CircularProgressIndicator();
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
                       }
                     },
                   ),

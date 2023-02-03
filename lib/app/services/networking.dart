@@ -15,7 +15,7 @@ class NetworkHelper {
         print(response.statusCode);
       }
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 }
