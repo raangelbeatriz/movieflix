@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieflix/app/core/debounce/debounce.dart';
 import 'package:movieflix/app/core/ui/helpers/messages.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ class SearchMoviesPage extends StatefulWidget {
 
 class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
   late SearchMoviesViewModel searchMoviesViewModel;
+  final _debounce = Debouncer(milliseconds: 600);
   @override
   void initState() {
     super.initState();
@@ -75,28 +77,10 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
                             ),
                             onChanged: (value) async {
                               itemSearch = value;
+                              _debounce.run(() async {
+                                searchMoviesViewModel.checkSearch(itemSearch);
+                              });
                             },
-                          ),
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: InkWell(
-                          onTap: () async {
-                            print("testando $itemSearch");
-                            await searchMoviesViewModel
-                                .fetchMoviesData(itemSearch ?? "");
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: ksecondColor,
-                              borderRadius: BorderRadius.circular(9),
-                            ),
-                            child: const Icon(Icons.search),
                           ),
                         ),
                       ),

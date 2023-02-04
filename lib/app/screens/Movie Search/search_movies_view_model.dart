@@ -65,11 +65,20 @@ class SearchMoviesViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  void checkSearch(String? itemSearch) async {
+    if (itemSearch != null && itemSearch.length > 3) {
+      await fetchMoviesData(itemSearch);
+    } else {
+      deletePosterMovies();
+    }
+  }
+
   void deletePosterMovies() {
     posterMovies.clear();
     isLoadingMovies = false;
     searching = false;
     oldMovie = "";
+    notifyListeners();
   }
 
   String setMovieString(String movie) {
