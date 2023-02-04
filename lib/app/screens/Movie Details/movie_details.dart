@@ -54,12 +54,9 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> with Messages {
                       posterPath: movieDetailsViewModel.movie!.posterPath,
                     ),
                   ),
-                  SizedBox(
-                    height: size.height * 0.35,
-                    child: SynopsisWidget(
-                      text: movieDetailsViewModel.movie!.overview,
-                      movieTitle: movieDetailsViewModel.movie!.title,
-                    ),
+                  SynopsisWidget(
+                    text: movieDetailsViewModel.movie!.overview,
+                    movieTitle: movieDetailsViewModel.movie!.title,
                   ),
                 ],
               ),
