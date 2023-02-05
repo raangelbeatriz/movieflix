@@ -93,35 +93,35 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
                 width: size.width,
                 child: Consumer<SearchMoviesViewModel>(
                   builder: (context, value, child) {
-                    if (value.isLoadingMovies && value.searching) {
+                    if (value.isLoadingMovies && value.page == 1) {
                       return const Center(child: CircularProgressIndicator());
-                    } else if (value.searching == false) {
-                      return const SizedBox.shrink();
-                    } else if (value.posterMovies.isNotEmpty) {
-                      return NotificationListener<ScrollNotification>(
-                        onNotification: (notification) {
-                          if (notification.metrics.maxScrollExtent ==
-                              notification.metrics.pixels) {
-                            if (searchMoviesViewModel.isLoadingMovies ==
-                                    false &&
-                                searchMoviesViewModel.page <=
-                                    searchMoviesViewModel.totalPages) {
-                              searchMoviesViewModel
-                                  .fetchMoviesData(itemSearch ?? "");
-                            }
-                          }
-                          return true;
-                        },
-                        child: ListView.builder(
-                          itemCount: value.posterMovies.length,
-                          scrollDirection: Axis.vertical,
-                          itemBuilder: (context, index) {
-                            return value.posterMovies[index];
-                          },
-                        ),
-                      );
                     } else {
-                      return const SizedBox.shrink();
+                      if (value.posterMovies.isNotEmpty) {
+                        return NotificationListener<ScrollNotification>(
+                          onNotification: (notification) {
+                            if (notification.metrics.maxScrollExtent ==
+                                notification.metrics.pixels) {
+                              if (searchMoviesViewModel.isLoadingMovies ==
+                                      false &&
+                                  searchMoviesViewModel.page <=
+                                      searchMoviesViewModel.totalPages) {
+                                searchMoviesViewModel
+                                    .fetchMoviesData(itemSearch ?? "");
+                              }
+                            }
+                            return true;
+                          },
+                          child: ListView.builder(
+                            itemCount: value.posterMovies.length,
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (context, index) {
+                              return value.posterMovies[index];
+                            },
+                          ),
+                        );
+                      } else {
+                        return const SizedBox.shrink();
+                      }
                     }
                   },
                 ),

@@ -11,7 +11,6 @@ class SearchMoviesViewModel extends ChangeNotifier {
   List<PosterSearch> posterMovies = [];
 
   bool isLoadingMovies = false;
-  bool searching = false;
   int page = 1;
   int totalPages = 1;
   String oldMovie = "";
@@ -49,9 +48,7 @@ class SearchMoviesViewModel extends ChangeNotifier {
           }
         }
         isLoadingMovies = false;
-        if (movie != "") {
-          page++;
-        }
+        page++;
       }
     } catch (e) {
       isLoadingMovies = false;
@@ -71,7 +68,6 @@ class SearchMoviesViewModel extends ChangeNotifier {
   void deletePosterMovies() {
     posterMovies.clear();
     isLoadingMovies = false;
-    searching = false;
     oldMovie = "";
     notifyListeners();
   }
@@ -79,7 +75,6 @@ class SearchMoviesViewModel extends ChangeNotifier {
   String setMovieString(String movie) {
     if (movie != "") {
       oldMovie = movie;
-      searching = true;
     }
     if (movie == "" && oldMovie != "") {
       movie = oldMovie;
