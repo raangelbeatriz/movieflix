@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/app/core/components/text_search_poster.dart';
+import 'package:movieflix/app/core/ui/components/text_search_poster.dart';
 
-import '../../constants.dart';
+import '../../../constants.dart';
 import 'go_back_widget.dart';
 
 class SuperPosterWidget extends StatelessWidget {

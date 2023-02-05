@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movieflix/app/core/components/go_back_widget.dart';
+import 'package:movieflix/app/core/ui/components/go_back_widget.dart';
 import 'package:movieflix/app/core/ui/helpers/messages.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/formatters/formatters.dart';
-import '../../core/components/super_poster.dart';
-import '../../core/components/synopis_widget.dart';
+import '../../core/ui/components/super_poster.dart';
+import '../../core/ui/components/synopis_widget.dart';
 import 'movie_details_view_model.dart';
 
 class MovieDetailsPage extends StatefulWidget {

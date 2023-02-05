@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../routes/routes.dart';
+import '../../routes/routes.dart';
 import 'text_search_poster.dart';
 
 class PosterSearch extends StatelessWidget {

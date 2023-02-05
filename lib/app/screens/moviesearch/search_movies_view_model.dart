@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import '../../core/formatters/formatters.dart';
-import '../../core/components/poster_search.dart';
+import '../../core/ui/components/poster_search.dart';
 import '../../models/movie_model.dart';
 import '../../repository/movie_repository.dart';
 
