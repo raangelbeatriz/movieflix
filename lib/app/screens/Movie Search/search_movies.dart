@@ -16,6 +16,7 @@ class SearchMoviesPage extends StatefulWidget {
 class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
   late SearchMoviesViewModel searchMoviesViewModel;
   final _debounce = Debouncer(milliseconds: 600);
+  String itemSearch = '';
   @override
   void initState() {
     super.initState();
@@ -40,7 +41,6 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    String? itemSearch;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -106,7 +106,7 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
                                   searchMoviesViewModel.page <=
                                       searchMoviesViewModel.totalPages) {
                                 searchMoviesViewModel
-                                    .fetchMoviesData(itemSearch ?? "");
+                                    .fetchMoviesData(itemSearch);
                               }
                             }
                             return true;

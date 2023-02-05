@@ -14,7 +14,6 @@ class SearchMoviesViewModel extends ChangeNotifier {
   int page = 1;
   int totalPages = 1;
   String oldMovie = "";
-  int moviesLenght = 0;
   String errorMessage = '';
 
   SearchMoviesViewModel({required MovieRepository movieRepository})
@@ -22,8 +21,6 @@ class SearchMoviesViewModel extends ChangeNotifier {
 
   Future<void> fetchMoviesData(String movie) async {
     errorMessage = '';
-    checkSearchState(movie, oldMovie);
-    movie = setMovieString(movie);
     try {
       if (page <= totalPages) {
         print('To na pagina $page e o total é $totalPages');
@@ -33,7 +30,6 @@ class SearchMoviesViewModel extends ChangeNotifier {
         if (movies.isNotEmpty) {
           for (Movie item in movies) {
             String date = Formatters.dateFormater(item.releaseDate);
-            moviesLenght++;
             print(item.title);
             posterMovies.addAll(
               {
@@ -57,38 +53,27 @@ class SearchMoviesViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void checkSearch(String? itemSearch) async {
-    if (itemSearch != null && itemSearch.length > 3) {
+  void checkSearch(String itemSearch) async {
+    errorMessage = '';
+    if (itemSearch.length > 3) {
+      clearSearch();
       await fetchMoviesData(itemSearch);
-    } else {
-      deletePosterMovies();
+    }
+    if (itemSearch.isEmpty) {
+      clearSearch();
     }
   }
 
   void deletePosterMovies() {
     posterMovies.clear();
     isLoadingMovies = false;
-    oldMovie = "";
     notifyListeners();
   }
 
-  String setMovieString(String movie) {
-    if (movie != "") {
-      oldMovie = movie;
-    }
-    if (movie == "" && oldMovie != "") {
-      movie = oldMovie;
-    }
-    return movie;
-  }
-
-  void checkSearchState(String movie, String oldMovie) {
-    if (movie != "" && movie != oldMovie) {
-      totalPages = 1;
-      page = 1;
-      moviesLenght = 0;
-      deletePosterMovies();
-      notifyListeners();
-    }
+  clearSearch() {
+    page = 1;
+    totalPages = 1;
+    deletePosterMovies();
+    notifyListeners();
   }
 }
