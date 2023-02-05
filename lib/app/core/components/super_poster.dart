@@ -22,10 +22,12 @@ class SuperPosterWidget extends StatelessWidget {
       children: [
         Container(
           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage(
-                    'https://image.tmdb.org/t/p/original$posterPath'),
-                fit: BoxFit.cover),
+            image: posterPath != null
+                ? DecorationImage(
+                    image: NetworkImage(
+                        'https://image.tmdb.org/t/p/original$posterPath'),
+                    fit: BoxFit.cover)
+                : null,
           ),
         ),
         Container(
