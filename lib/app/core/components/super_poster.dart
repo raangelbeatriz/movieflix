@@ -37,11 +37,6 @@ class SuperPosterWidget extends StatelessWidget {
                 begin: Alignment.bottomCenter),
           ),
         ),
-        const Positioned(
-          top: 40,
-          left: 5,
-          child: GoBackWidget(),
-        ),
         Positioned(
           bottom: 20,
           left: 15,

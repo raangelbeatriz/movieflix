@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieflix/app/core/components/go_back_widget.dart';
 import 'package:movieflix/app/core/ui/helpers/messages.dart';
 import 'package:provider/provider.dart';
 
@@ -34,6 +35,12 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> with Messages {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: const GoBackWidget(),
+      ),
       body: Consumer<MovieDetailsViewModel>(builder: (context, value, child) {
         if (value.isLoading) {
           return const Center(
