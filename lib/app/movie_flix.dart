@@ -3,9 +3,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movieflix/app/constants.dart';
 
 import 'core/routes/routes.dart';
-import 'screens/Home Page/home_page_router.dart';
-import 'screens/Movie Details/movie_page_router.dart';
-import 'screens/Movie Search/search_movie_router.dart';
+import 'screens/home/home_page_router.dart';
+import 'screens/moviedetails/movie_page_router.dart';
+import 'screens/moviesearch/search_movie_router.dart';
 
 class MovieFlix extends StatelessWidget {
   const MovieFlix({Key? key}) : super(key: key);
