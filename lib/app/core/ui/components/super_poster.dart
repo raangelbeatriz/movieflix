@@ -51,7 +51,7 @@ class SuperPosterWidget extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Text('Rankings: $ranking'),
+              Text('Rankings: ${ranking?.toStringAsFixed(2)}'),
               const SizedBox(
                 width: 20,
               ),
