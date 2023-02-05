@@ -105,18 +105,35 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
                                       false &&
                                   searchMoviesViewModel.page <=
                                       searchMoviesViewModel.totalPages) {
+                                searchMoviesViewModel.setOnPagination(true);
                                 searchMoviesViewModel
-                                    .fetchMoviesData(itemSearch);
+                                    .fetchMoviesData(itemSearch)
+                                    .whenComplete(() => searchMoviesViewModel
+                                        .setOnPagination(false));
                               }
                             }
                             return true;
                           },
-                          child: ListView.builder(
-                            itemCount: value.posterMovies.length,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (context, index) {
-                              return value.posterMovies[index];
-                            },
+                          child: Column(
+                            children: [
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: value.posterMovies.length,
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index) {
+                                    return value.posterMovies[index];
+                                  },
+                                ),
+                              ),
+                              Visibility(
+                                visible: searchMoviesViewModel.onPagination,
+                                replacement: const SizedBox.shrink(),
+                                child: const Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 30),
+                                  child: CircularProgressIndicator(),
+                                ),
+                              )
+                            ],
                           ),
                         );
                       } else {

@@ -15,9 +15,15 @@ class SearchMoviesViewModel extends ChangeNotifier {
   int totalPages = 1;
   String oldMovie = "";
   String errorMessage = '';
+  bool onPagination = false;
 
   SearchMoviesViewModel({required MovieRepository movieRepository})
       : _movieRepository = movieRepository;
+
+  setOnPagination(bool onPagination) {
+    this.onPagination = onPagination;
+    notifyListeners();
+  }
 
   Future<void> fetchMoviesData(String movie) async {
     errorMessage = '';
@@ -73,6 +79,7 @@ class SearchMoviesViewModel extends ChangeNotifier {
   clearSearch() {
     page = 1;
     totalPages = 1;
+    onPagination = false;
     deletePosterMovies();
     notifyListeners();
   }
