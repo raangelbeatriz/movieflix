@@ -13,11 +13,9 @@ class SearchMoviesViewModel extends ChangeNotifier {
   bool isLoadingMovies = false;
   bool searching = false;
   int page = 1;
-  int totalPages = 0;
+  int totalPages = 1;
   String oldMovie = "";
-  bool lastPage = false;
   int moviesLenght = 0;
-  bool restart = false;
   String errorMessage = '';
 
   SearchMoviesViewModel({required MovieRepository movieRepository})
@@ -28,7 +26,8 @@ class SearchMoviesViewModel extends ChangeNotifier {
     checkSearchState(movie, oldMovie);
     movie = setMovieString(movie);
     try {
-      if (lastPage == false) {
+      if (page <= totalPages) {
+        print('To na pagina $page e o total é $totalPages');
         isLoadingMovies = true;
         List<Movie> movies = await _movieRepository.searchMovie(movie, page);
         totalPages = await _movieRepository.getTotalPagesSearchMovies(movie);
@@ -50,11 +49,7 @@ class SearchMoviesViewModel extends ChangeNotifier {
           }
         }
         isLoadingMovies = false;
-        int totalPagesPlus = totalPages + 1;
-        if (page == totalPagesPlus) {
-          lastPage = true;
-        }
-        if (movies != "") {
+        if (movie != "") {
           page++;
         }
       }
@@ -93,14 +88,9 @@ class SearchMoviesViewModel extends ChangeNotifier {
   }
 
   void checkSearchState(String movie, String oldMovie) {
-    if (movie == "" && oldMovie == "") {
-      deletePosterMovies();
-    }
     if (movie != "" && movie != oldMovie) {
-      lastPage = false;
-      totalPages = 0;
+      totalPages = 1;
       page = 1;
-      restart = false;
       moviesLenght = 0;
       deletePosterMovies();
       notifyListeners();

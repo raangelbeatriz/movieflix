@@ -104,13 +104,10 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
                               notification.metrics.pixels) {
                             if (searchMoviesViewModel.isLoadingMovies ==
                                     false &&
-                                searchMoviesViewModel.lastPage == false) {
+                                searchMoviesViewModel.page <=
+                                    searchMoviesViewModel.totalPages) {
                               searchMoviesViewModel
                                   .fetchMoviesData(itemSearch ?? "");
-                            } else {
-                              print(
-                                  "Ainda carregando; loading é igual a ${searchMoviesViewModel.isLoadingMovies}");
-                              return true;
                             }
                           }
                           return true;
