@@ -4,7 +4,7 @@ import 'package:movieflix/app/constants.dart';
 
 import 'core/routes/routes.dart';
 import 'screens/home/home_page_router.dart';
-import 'screens/moviedetails/movie_page_router.dart';
+import 'screens/moviedetails/movie_details_router.dart';
 import 'screens/moviesearch/search_movie_router.dart';
 
 class MovieFlix extends StatelessWidget {

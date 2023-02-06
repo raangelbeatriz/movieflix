@@ -7,7 +7,7 @@ class SearchMovieRouter {
   SearchMovieRouter._();
   static Widget get page => MultiProvider(
         providers: [
-          ChangeNotifierProvider<SearchMoviesViewModel>(
+          ChangeNotifierProvider(
             create: (context) =>
                 SearchMoviesViewModel(movieRepository: context.read()),
           ),

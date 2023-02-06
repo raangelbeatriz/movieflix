@@ -9,7 +9,7 @@ class HomePageRouter {
 
   static Widget get page => MultiProvider(
         providers: [
-          ChangeNotifierProvider<HomePageViewModel>(
+          ChangeNotifierProvider(
             create: (context) =>
                 HomePageViewModel(movieRepository: context.read()),
           ),

@@ -8,7 +8,7 @@ class MovieDetailsRouter {
   MovieDetailsRouter._();
   static Widget get page => MultiProvider(
         providers: [
-          ChangeNotifierProvider<MovieDetailsViewModel>(
+          ChangeNotifierProvider(
             create: (context) =>
                 MovieDetailsViewModel(movieRepository: context.read()),
           ),
