@@ -43,7 +43,7 @@ flutter pub get
 flutter run
 ```
    
-   >This project was developed ❤️ by **[@Beatriz Rangel](https://www.linkedin.com/in/beatrizorangel/)**, following the classes of [@Academia do Flutter](https://instituto.academiadoflutter.com.br/)
+   >This project was developed ❤️ by **[@Beatriz Rangel](https://www.linkedin.com/in/beatrizorangel/)**
    ---
 
 
