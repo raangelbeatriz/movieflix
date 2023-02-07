@@ -5,7 +5,8 @@ The MovieFlix is a Flutter App, where the user can easily search for movies titl
 To make this happen I used a popular movie API called The Movie DB.
 
 ## ⚡ Demo
-![MovieFlix DEMO](gif/demo-movieflix.gif)
+![Screen_Recording_20230206_212935_AdobeExpress](https://user-images.githubusercontent.com/50742224/217119512-df387aae-6053-448a-ac73-67b2edc3f685.gif)
+
 
 ## 🎯 My Goal
 My main goal was to make an app that fetches data from the web, so I could practice how to make HTTP requests, consume data from an API, with pagination, and display it. I also wanted to learn how to use Provider, and practice the MVVM architecture.
