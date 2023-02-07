@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movieflix/app/core/ui/helpers/size_extensions.dart';
 
 import '../../routes/routes.dart';
 
@@ -19,8 +20,8 @@ class PosterMovie extends StatelessWidget {
         Navigator.pushNamed(context, Routes.movieDetails, arguments: id);
       },
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.25,
-        width: MediaQuery.of(context).size.width * 0.5,
+        height: context.percentHeigth(0.25),
+        width: context.percentWidth(0.5),
         margin: const EdgeInsets.all(15.0),
         child: CachedNetworkImage(
           imageUrl: 'https://image.tmdb.org/t/p/original/$poster',

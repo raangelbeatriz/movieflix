@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movieflix/app/core/debounce/debounce.dart';
 import 'package:movieflix/app/core/ui/helpers/messages.dart';
+import 'package:movieflix/app/core/ui/helpers/size_extensions.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants.dart';
@@ -40,7 +41,6 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -89,8 +89,8 @@ class _SearchMoviesPageState extends State<SearchMoviesPage> with Messages {
                 ),
               ),
               SizedBox(
-                height: size.height * 0.8,
-                width: size.width,
+                height: context.percentHeigth(0.8),
+                width: context.width,
                 child: Consumer<SearchMoviesViewModel>(
                   builder: (context, value, child) {
                     if (value.isLoadingMovies && value.page == 1) {

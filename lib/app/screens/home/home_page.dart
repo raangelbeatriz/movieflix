@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movieflix/app/core/ui/helpers/messages.dart';
+import 'package:movieflix/app/core/ui/helpers/size_extensions.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -41,7 +42,6 @@ class _HomePageState extends State<HomePage> with Messages {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -69,8 +69,8 @@ class _HomePageState extends State<HomePage> with Messages {
                 ),
                 Center(
                   child: SizedBox(
-                    height: size.height * 0.35,
-                    width: size.width,
+                    height: context.percentHeigth(0.35),
+                    width: context.width,
                     child: Consumer<HomePageViewModel>(
                       builder: (context, value, child) {
                         if (value.isLoadingTrendingMovies) {
@@ -110,15 +110,15 @@ class _HomePageState extends State<HomePage> with Messages {
                   }),
                 ),
                 SizedBox(
-                  height: size.height * 0.03,
+                  height: context.percentHeigth(0.03),
                 ),
                 const Text(
                   "Popular Movies",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(
-                  height: size.height * 0.38,
-                  width: size.width,
+                  height: context.percentHeigth(0.38),
+                  width: context.width,
                   child: Consumer<HomePageViewModel>(
                     builder: (context, value, child) {
                       if (value.isLoadingMovies) {

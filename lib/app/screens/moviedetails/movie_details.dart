@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movieflix/app/core/ui/components/go_back_widget.dart';
 import 'package:movieflix/app/core/ui/helpers/messages.dart';
+import 'package:movieflix/app/core/ui/helpers/size_extensions.dart';
 import 'package:provider/provider.dart';
 
 import '../../core/formatters/formatters.dart';
@@ -33,7 +34,6 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> with Messages {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -54,7 +54,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> with Messages {
               child: Column(
                 children: [
                   SizedBox(
-                    height: size.height * 0.65,
+                    height: context.percentHeigth(0.65),
                     child: SuperPosterWidget(
                       ranking: movieDetailsViewModel.movie!.voteAverage,
                       releaseDate: date,

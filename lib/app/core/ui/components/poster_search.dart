@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movieflix/app/core/ui/helpers/size_extensions.dart';
 
 import '../../routes/routes.dart';
 import 'text_search_poster.dart';
@@ -26,14 +27,14 @@ class PosterSearch extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 16),
         child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height * 0.18,
+          width: context.width,
+          height: context.percentHeigth(0.18),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.45,
-                height: MediaQuery.of(context).size.height * 0.18,
+                width: context.percentWidth(0.45),
+                height: context.percentHeigth(0.18),
                 child: Image(
                   image: NetworkImage(
                       "https://image.tmdb.org/t/p/original$poster"),
@@ -44,8 +45,8 @@ class PosterSearch extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.45,
-                height: MediaQuery.of(context).size.height * 0.18,
+                width: context.percentWidth(0.45),
+                height: context.percentHeigth(0.18),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
